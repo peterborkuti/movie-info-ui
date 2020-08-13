@@ -10,8 +10,9 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatTableModule} from '@angular/material/table';
 import {MovieConfig, getConfig} from './helpers/get-config';
+
+import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import {MovieConfig, getConfig} from './helpers/get-config';
     FormsModule,
     MatToolbarModule,
     HttpClientModule,
-    MatTableModule
+    DataTablesModule
   ],
   providers: [
     {provide: MovieConfig, useFactory: getConfig},

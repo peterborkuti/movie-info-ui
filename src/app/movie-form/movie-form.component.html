@@ -23,7 +23,9 @@
       <input matInput placeholder="Transformer" formControlName="title" required>
       <mat-error *ngIf="form.controls.title.invalid">You must enter a value</mat-error>
     </fieldset>
-  
-    <button type="submit" [disabled]="!form.valid">Submit</button>
-  
-  </form>
+
+    <mat-toolbar>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Submit</button>
+    </mat-toolbar>
+
+    </form>

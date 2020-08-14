@@ -38,9 +38,9 @@ export class MovieTableComponent implements OnInit {
     this.dtOptions = {
       data: [],
       columns: [
-        {data: 'Title'},
-        {data: 'Year'},
-        {data: 'Director'},
+        {title: 'Title', data: 'Title'},
+        {title: 'Year', data: 'Year'},
+        {title: 'Director(s)', data: 'Director'},
       ]
     };
   }

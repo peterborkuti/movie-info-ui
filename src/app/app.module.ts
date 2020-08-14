@@ -6,10 +6,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import {MatTabsModule} from '@angular/material/tabs';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatRadioModule} from '@angular/material/radio';
-import {MatToolbarModule} from '@angular/material/toolbar';
 import {MovieConfig, getConfig} from './helpers/get-config';
 
 import { DataTablesModule } from 'angular-datatables';
@@ -25,14 +25,14 @@ import { MovieFormComponent } from './movie-form/movie-form.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MatTabsModule,
     MatFormFieldModule,
     MatRadioModule,
     ReactiveFormsModule,
     FormsModule,
     MatToolbarModule,
     HttpClientModule,
-    DataTablesModule
+    DataTablesModule,
+    MatButtonModule
   ],
   providers: [
     {provide: MovieConfig, useFactory: getConfig},

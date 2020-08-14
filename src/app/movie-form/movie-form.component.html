@@ -1,0 +1,29 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <fieldset>
+      <legend>Synchron or asynchron mode</legend>
+      <label>Mode: </label>
+      <mat-radio-group formControlName="mode">
+        <mat-radio-button value="flux">Reactive</mat-radio-button>
+        <mat-radio-button value="synchron">Normal</mat-radio-button>
+      </mat-radio-group>
+    </fieldset>
+  
+    <fieldset>
+      <legend>Choosing between Open Movie Database or The Movie Database</legend>
+      <label>Api: </label>
+      <mat-radio-group formControlName="api">
+        <mat-radio-button value="omdbapi">Open Movie DB</mat-radio-button>
+        <mat-radio-button value="themoviedb">The Movie Db</mat-radio-button>
+      </mat-radio-group>
+    </fieldset>
+  
+    <fieldset>
+      <legend>Part of the title for searching<sup>*</sup></legend>
+      <input matInput placeholder="Transformer" formControlName="title" required>
+      <mat-error *ngIf="form.controls.title.invalid">You must enter a value</mat-error>
+    </fieldset>
+  
+    <button type="submit" [disabled]="!form.valid">Submit</button>
+  
+  </form>

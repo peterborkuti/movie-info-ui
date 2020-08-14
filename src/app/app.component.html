@@ -2,43 +2,6 @@
   <span>Search in different movie databases</span>
 </mat-toolbar>
 
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<movie-form (value)="onFormSubmit($event)"></movie-form>
 
-  <fieldset>
-    <legend>Synchron or asynchron mode</legend>
-    <label>Mode: </label>
-    <mat-radio-group formControlName="mode">
-      <mat-radio-button value="flux">Reactive</mat-radio-button>
-      <mat-radio-button value="synchron">Normal</mat-radio-button>
-    </mat-radio-group>
-  </fieldset>
-
-  <fieldset>
-    <legend>Choosing between Open Movie Database or The Movie Database</legend>
-    <label>Api: </label>
-    <mat-radio-group formControlName="api">
-      <mat-radio-button value="omdbapi">Open Movie DB</mat-radio-button>
-      <mat-radio-button value="themoviedb">The Movie Db</mat-radio-button>
-    </mat-radio-group>
-  </fieldset>
-
-  <fieldset>
-    <legend>Part of the title for searching<sup>*</sup></legend>
-    <input matInput placeholder="Transformer" formControlName="title" required>
-    <mat-error *ngIf="form.controls.title.invalid">You must enter a value</mat-error>
-  </fieldset>
-
-  <button type="submit" [disabled]="!form.valid">Submit</button>
-
-</form>
-
-
-<table mat-table [dataSource]="data" class="mat-elevation-z8">
-  <ng-container [matColumnDef]="column" *ngFor="let column of columnsToDisplay">
-    <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-    <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-  <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
-</table>
+<movie-table [movies]="movies" [movie]="movie"></movie-table>

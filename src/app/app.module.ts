@@ -13,10 +13,14 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MovieConfig, getConfig} from './helpers/get-config';
 
 import { DataTablesModule } from 'angular-datatables';
+import { MovieTableComponent } from './movie-table/movie-table.component';
+import { MovieFormComponent } from './movie-form/movie-form.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MovieTableComponent,
+    MovieFormComponent
   ],
   imports: [
     BrowserModule,

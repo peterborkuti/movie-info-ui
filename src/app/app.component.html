@@ -2,6 +2,10 @@
   <span>Search in different movie databases</span>
 </mat-toolbar>
 
-<movie-form (value)="onFormSubmit($event)"></movie-form>
+<movie-form (value)="onFormSubmit($event)" [enableForm]="formEnabled">
 
-<movie-table [movies]="movies" [movie]="movie"></movie-table>
+  <mat-divider [vertical]="true"></mat-divider><button mat-raised-button color="primary" (click)="cancelRequest()" [disabled]="!requestCancelable">Cancel request</button>
+</movie-form>
+
+<movie-table [movies]="movies" [movie]="movie">
+</movie-table>

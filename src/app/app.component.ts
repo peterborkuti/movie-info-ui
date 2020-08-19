@@ -15,6 +15,9 @@ export class AppComponent {
   movies: Movie[]= [];
   movie: Movie = new Movie();
 
+  requestCancelable = false;
+  formEnabled = true;
+
   eventSource: EventSource;
 
   constructor(private config: MovieConfig,
@@ -25,6 +28,7 @@ export class AppComponent {
 
 
   onFormSubmit(formValue: MovieForm) {
+    this.formEnabled = false;
     const url = this.config.serviceURL + formValue.mode + '/' + formValue.api;
 
     if (formValue.mode === 'synchron') {
@@ -37,12 +41,17 @@ export class AppComponent {
 
   private doSynchron(url: string, title: string) {
     this.http.get<{movies: []}>(url, {params: {title: title}}).subscribe(
-      o => this.movies = o.movies,
+      o => {
+        this.movies = o.movies;
+        this.cancelRequest();
+      },
       (error: HttpErrorResponse) => this.errorHandler(error.message)
     );
   }
 
   private doAsynchron(url: string, title: string) {
+    this.requestCancelable = true;
+
     if (this.eventSource && (this.eventSource.OPEN || this.eventSource.CONNECTING)) {
       this.eventSource.close();
     }
@@ -51,18 +60,26 @@ export class AppComponent {
 
     this.eventSource.onerror = ((event: ErrorEvent) => {
       this.zone.run(() => this.errorHandler("Some error happened when connecting to server."));
-      this.eventSource.close();
+      this.cancelRequest();
     });
 
     this.movies = [];
 
-    this.eventSource.onmessage = this.onEventMessage;
+    this.eventSource.onmessage = (event) => this.onEventMessage(event);
+  }
+
+  cancelRequest() {
+    this.zone.run(() => {
+      this.eventSource.close();
+      this.formEnabled = true;
+      this.requestCancelable = false;
+    });
   }
 
   private onEventMessage(event: MessageEvent) {
     const data = JSON.parse(event['data']);
     if (!data.Title) {
-      this.eventSource.close();
+      this.cancelRequest();
     }
     else {
       if (Array.isArray(data.Director)) {
@@ -73,6 +90,7 @@ export class AppComponent {
   }
 
   errorHandler(error: string) {
+    this.cancelRequest();
     this.snackBar.open(error, "X", {
       duration: 0,
       panelClass: 'notif-error'

@@ -25,7 +25,9 @@
     </fieldset>
 
     <mat-toolbar>
-      <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Submit</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid || !enableForm">Submit</button>
+      <ng-content></ng-content>
     </mat-toolbar>
 
     </form>
+    

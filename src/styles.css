@@ -4,3 +4,9 @@
 
 html, body { height: 100%; }
 body { margin-left: 5em; margin-right: 5em; margin-top: 2em; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.notif-error {
+    background-color: red;
+}
+.mat-snack-bar-container.notif-error {
+    max-width: 100%;
+}

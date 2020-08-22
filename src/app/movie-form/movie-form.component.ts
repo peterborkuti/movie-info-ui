@@ -1,7 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MovieConfig } from '../helpers/get-config';
-import { HttpClient } from '@angular/common/http';
 import { MovieForm } from '../helpers/movie-form';
 
 @Component({

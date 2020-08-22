@@ -33,4 +33,53 @@ describe('MovieFormComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should disable submit button', () => {
+    const submit: HTMLButtonElement = fixture.nativeElement.querySelector('mat-toolbar button');
+
+    expect(submit.hasAttribute('disabled')).toBeTrue();
+  });
+
+  it('should enable submit button when input not empty', (done) => {
+    const input: HTMLInputElement = fixture.nativeElement.querySelector('input');
+    const submit: HTMLButtonElement = fixture.nativeElement.querySelector('mat-toolbar button');
+
+    fixture.whenStable().then(() => {
+      expect(submit.disabled).toBeTrue();
+
+      component.form.controls.title.setValue("ANYTEXT");
+      input.dispatchEvent(new Event('input'));
+      component.form.updateValueAndValidity();
+      fixture.detectChanges();
+
+      expect(submit.disabled).toBeFalse();
+
+      done();
+    });
+  });
+
+  it('should return with settings on submit', (done) => {
+    const input: HTMLInputElement = fixture.nativeElement.querySelector('input');
+    const submit: HTMLButtonElement = fixture.nativeElement.querySelector('mat-toolbar button');
+
+    fixture.whenStable().then(() => {
+      component.form.controls.title.setValue("ANYTEXT");
+      component.form.controls.mode.setValue('synchron');
+      component.form.controls.api.setValue('themoviedb');
+
+      input.dispatchEvent(new Event('input'));
+      component.form.updateValueAndValidity();
+      fixture.detectChanges();
+
+      expect(submit.disabled).toBeFalse();
+      
+      component.value.subscribe((data) => {
+        expect(data).toEqual({title: 'ANYTEXT', api: 'themoviedb', mode: 'synchron'});
+        done();
+      });
+
+      submit.click();
+      fixture.detectChanges();
+    });
+  });
 });

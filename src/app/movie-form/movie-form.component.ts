@@ -15,7 +15,7 @@ export class MovieFormComponent implements OnInit {
 
   form:  FormGroup;
 
-  constructor(fb: FormBuilder, private config: MovieConfig, private http: HttpClient) {
+  constructor(fb: FormBuilder) {
     this.form = fb.group({mode: fb.control('flux'), api:fb.control('omdbapi'), title: fb.control('', Validators.required)})
   }
 

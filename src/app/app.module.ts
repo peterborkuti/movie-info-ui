@@ -12,6 +12,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatRadioModule} from '@angular/material/radio';
+
 import {MovieConfig, getConfig} from './helpers/get-config';
 
 import { DataTablesModule } from 'angular-datatables';
@@ -36,7 +37,8 @@ import { MovieFormComponent } from './movie-form/movie-form.component';
     DataTablesModule,
     MatButtonModule,
     MatSnackBarModule,
-    MatDividerModule
+    MatDividerModule,
+    MatFormFieldModule,
   ],
   providers: [
     {provide: MovieConfig, useFactory: getConfig},

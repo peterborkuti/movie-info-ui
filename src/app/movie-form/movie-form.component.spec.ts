@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MovieFormComponent } from './movie-form.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 describe('MovieFormComponent', () => {
   let component: MovieFormComponent;
@@ -8,7 +12,14 @@ describe('MovieFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MovieFormComponent ]
+      declarations: [ MovieFormComponent ],
+      imports: [
+        ReactiveFormsModule,
+        FormsModule,
+        MatToolbarModule,
+        MatRadioModule,
+        MatFormFieldModule,
+      ],
     })
     .compileComponents();
   }));

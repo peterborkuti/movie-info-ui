@@ -39,17 +39,19 @@ export class AppComponent {
     }
   }
 
-  private doSynchron(url: string, title: string) {
+  doSynchron(url: string, title: string) {
     this.http.get<{movies: []}>(url, {params: {title: title}}).subscribe(
       o => {
         this.movies = o.movies;
+        // the last movie is empty
+        if (this.movies.length > 0 && !this.movies.slice(-1)[0].Title) this.movies.length--;
         this.cancelRequest();
       },
       (error: HttpErrorResponse) => this.errorHandler(error.message)
     );
   }
 
-  private doAsynchron(url: string, title: string) {
+  doAsynchron(url: string, title: string) {
     this.requestCancelable = true;
 
     if (this.eventSource && (this.eventSource.OPEN || this.eventSource.CONNECTING)) {
